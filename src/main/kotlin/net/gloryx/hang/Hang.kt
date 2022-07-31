@@ -5,13 +5,31 @@ import com.typesafe.config.ConfigObject
 import com.typesafe.config.ConfigValue
 import com.typesafe.config.ConfigValueType
 
+/**
+ * The heart of Hang.
+ * @param modID The MOD ID, used in the [basePath] property to not interfere with Minecraft's normal language file schema.
+ * @param loader The [ClassLoader] to load the language files from.
+ * @see init
+ * @see Hang.get
+ */
 class Hang(val modID: String, val loader: ClassLoader) {
     constructor(modID: String, cls: Class<*>) : this(modID, cls.classLoader)
 
     /**
-     * 
+     * This is not recommended, because it can lead to translation files not showing up.
      */
     constructor(modID: String) : this(modID, Thread.currentThread().contextClassLoader)
+
+    /**
+     * You can use this constructor to use your custom language-files' base path.
+     * @param customBasePath
+     * @constructor Creates a [Hang] instance with the [customBasePath]
+     */
+    constructor(modID: String, loader: ClassLoader, customBasePath: String = "assets/$modID/lang") : this(modID, loader) {
+        this.basePath = customBasePath
+    }
+
+    private var basePath = "assets/$modID/lang"
     private lateinit var initialMap: Map<String, String>
     private var preferJson = false
 
@@ -33,10 +51,14 @@ class Hang(val modID: String, val loader: ClassLoader) {
         this.preferJson = preferJson
     }
 
+    /**
+     * @throws IllegalArgumentException if called before [init]
+     * @return the final map to set the map property (in the mixin) to.
+     */
     fun get(): Map<String, String> {
         if (!this::initialMap.isInitialized) throw IllegalArgumentException("#get called before #init(Map), follow README.md")
         val lang = initialMap["hang"] ?: "en_us"
-        val root = ConfigFactory.load(loader, "assets/$modID/lang/$lang.conf").root()
+        val root = ConfigFactory.load(loader, "$basePath/$lang.conf").root()
         val newMap = mutableMapOf<String, String>()
         for ((key, value) in root) {
             recObj(key, value, newMap)

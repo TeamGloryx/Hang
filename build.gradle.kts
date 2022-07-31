@@ -6,7 +6,7 @@ plugins {
     `java-library`
 }
 group = "net.gloryx"
-version = "0.1"
+version = "0.1.1"
 
 repositories {
     mavenCentral()
@@ -20,6 +20,12 @@ dependencies {
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
     jvmTarget = "1.8"
+}
+
+val compileJava: JavaCompile by tasks
+compileJava.apply {
+    sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
 }
 
 
