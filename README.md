@@ -1,7 +1,7 @@
 # Hang
 
-<a href="https://dev.gloryx.net/#/main/net/gloryx/hang">
-    <img src="https://dev.gloryx.net/api/badge/latest/main/net/gloryx/hang?color=40c14a&name=Hang&prefix=v" />
+<a href="https://github.com/GloryxMC/Hang/releases">
+    <img src="https://dev.gloryx.net/api/badge/latest/main/net/gloryx/hang?color=40c14a&name=Hang&prefix=v" style="" />
 </a>
 
 Use HOCON for translating Minecraft mods!
@@ -32,8 +32,7 @@ implementation("net.gloryx:hang:${hangVersion}")
 
 To make Hang work, you first have to make mixin into the class "ClientLanguageMap" (can be different in fabric and other
 versions). \
-Then @Inject into the `<init>` method and call Hang's initialization method. \
-\
+Then @Inject into the `<init>` method and call Hang's initialization method.
 
 ###### An example mixin for 1.16.5 Forge:
 
