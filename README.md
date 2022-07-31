@@ -1,7 +1,10 @@
 # Hang
 
-Use HOCON for translating Minecraft mods! \
-Latest version: 0.1.1
+<a href="https://dev.gloryx.net/#/main/net/gloryx/hang">
+    <img src="https://dev.gloryx.net/api/badge/latest/main/net/gloryx/hang?color=40c14a&name=Hang&prefix=v" />
+</a>
+
+Use HOCON for translating Minecraft mods!
 
 ## Dependency
 
@@ -31,7 +34,9 @@ To make Hang work, you first have to make mixin into the class "ClientLanguageMa
 versions). \
 Then @Inject into the `<init>` method and call Hang's initialization method. \
 \
+
 ###### An example mixin for 1.16.5 Forge:
+
 ```java
 
 @Mixin(ClientLanguageMap.class)
@@ -57,6 +62,7 @@ and **add the property _hang_** with the language code of that language file (e.
 Otherwise this won't work.
 
 Example en_us.json:
+
 ```json
 {
   "hang": "en_us"

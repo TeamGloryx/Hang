@@ -6,7 +6,7 @@ plugins {
     `java-library`
 }
 group = "net.gloryx"
-version = "0.1.1"
+version = "0.1.2"
 
 repositories {
     mavenCentral()
@@ -45,7 +45,7 @@ val sourcesJar by tasks.creating(Jar::class) {
 
 publishing {
     repositories {
-        maven("https://dev.gloryx.net/dev") {
+        maven("https://dev.gloryx.net/main") {
             credentials {
                 username = System.getenv("GLORYX_DEV_USER")
                 password = System.getenv("GLORYX_DEV_PASSWORD")
@@ -76,6 +76,9 @@ publishing {
 
             artifact(javadocJar)
             artifact(sourcesJar)
+
+            suppressAllPomMetadataWarnings()
+            withoutBuildIdentifier()
         }
     }
 }
