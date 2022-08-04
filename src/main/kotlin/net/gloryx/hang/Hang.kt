@@ -1,3 +1,4 @@
+@file:Suppress("UNUSED", "MemberVisibilityCanBePrivate")
 package net.gloryx.hang
 
 import com.typesafe.config.ConfigFactory
@@ -9,7 +10,7 @@ import com.typesafe.config.ConfigValueType
  * The heart of Hang.
  * @param modID The MOD ID, used in the [basePath] property to not interfere with Minecraft's normal language file schema.
  * @param loader The [ClassLoader] to load the language files from.
- * @see init
+ * @see Hang.init
  * @see Hang.get
  */
 class Hang(val modID: String, val loader: ClassLoader) {
@@ -57,7 +58,7 @@ class Hang(val modID: String, val loader: ClassLoader) {
      */
     fun get(): Map<String, String> {
         if (!this::initialMap.isInitialized) throw IllegalArgumentException("#get called before #init(Map), follow README.md")
-        val lang = initialMap["hang"] ?: "en_us"
+        val lang = initialMap["language.code"] ?: "en_us"
         val root = ConfigFactory.load(loader, "$basePath/$lang.conf").root()
         val newMap = mutableMapOf<String, String>()
         for ((key, value) in root) {
